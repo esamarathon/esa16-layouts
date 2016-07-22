@@ -1,11 +1,5 @@
 'use strict';
 $(function () {
-
-    // The name of the speedcontrol bundle that's used whenever a replicant or
-    // message needs to be used
-
-    var speedcontrolBundle = 'nodecg-speedcontrol';
-
     // JQuery selector initialiation ###
     var $timerInfo = $('#timer');
     var $runnerInfoElements = $('div.runnerInfo');
@@ -15,7 +9,7 @@ $(function () {
     var $runInformationCategory = $('#runInformationGameCategory');
     var $runInformationEstimate = $('#runInformationGameEstimate');
     var $runInformationName = $('#runInformationGameName');
-    var $twitchLogos = $('.twitchLogo');
+    var $runnerLogos = $('.runnerLogo');
     var $gameCaptures = $('.gameCapture');
 
     var currentTime = '';
@@ -23,16 +17,16 @@ $(function () {
     var intervalToNextTwitchDisplay = 120000;
     var timeoutTwitch = null;
 
-    // sceneID must be unique for this view, it's used in positioning of elements when using edit mode
+    // sceneID must be uniqe for this view, it's used in positioning of elements when using edit mode
     // if there are two views with the same sceneID all the elements will not have the correct positions
     var sceneID = $('html').attr('data-sceneid');
 
     // NodeCG Message subscription ###
-    nodecg.listenFor("resetTime", speedcontrolBundle, resetAllPlayerTimers);
-    nodecg.listenFor('timerReset', speedcontrolBundle, resetTimer);
-    nodecg.listenFor('timerSplit', speedcontrolBundle, splitTimer);
+    nodecg.listenFor("resetTime", resetAllPlayerTimers);
+    nodecg.listenFor('timerReset', resetTimer);
+    nodecg.listenFor('timerSplit', splitTimer);
 
-    var stopWatchesReplicant = nodecg.Replicant('stopwatches',speedcontrolBundle);
+    var stopWatchesReplicant = nodecg.Replicant('stopwatches');
     stopWatchesReplicant.on('change', function(oldVal, newVal) {
         if (!newVal) return;
         var time  = newVal[0].time || '88:88:88';
@@ -44,14 +38,14 @@ $(function () {
         setTime(time);
     });
 
-    var runDataActiveRunReplicant = nodecg.Replicant("runDataActiveRun",speedcontrolBundle);
+    var runDataActiveRunReplicant = nodecg.Replicant("runDataActiveRun");
     runDataActiveRunReplicant.on("change", function (oldValue, newValue) {
         if(typeof newValue !== 'undefined' && newValue != '' ) {
             updateSceneFields(newValue);
         }
     });
 
-    var runDataActiveRunRunnerListReplicant = nodecg.Replicant("runDataActiveRunRunnerList",speedcontrolBundle);
+    var runDataActiveRunRunnerListReplicant = nodecg.Replicant("runDataActiveRunRunnerList");
     runDataActiveRunRunnerListReplicant.on("change", function (oldValue, newValue) {
         if(typeof newValue === 'undefined' || newValue == '') {
             return;
@@ -59,6 +53,18 @@ $(function () {
 
         $runnerInfoElements.each( function( index, element ) {
             animation_setGameFieldAlternate($(this),getRunnerInformationName(newValue,index));
+				setTimeout(function() {
+				if (sceneID === '4_3-1player') {
+					$(element).css('line-height', '99px');
+					$(element).css('padding-top', '0');
+				}
+			}, 500);
+        });
+		
+        $runnerLogos.each( function(index, element) {
+			$(this).fadeOut(500, function() {
+				$(this).removeClass('twitchLogo').addClass('nameLogo').fadeIn(500);
+			});
         });
 
         if(timeoutTwitch != null) {
@@ -108,11 +114,25 @@ $(function () {
         var twitchUrl = "";
         if (runnerDataArray[index].twitch != null &&
             runnerDataArray[index].twitch.uri != null) {
-            twitchUrl = runnerDataArray[index].twitch.uri.replace("http://www.twitch.tv/","");
+            twitchUrl = 'twitch.tv/' + runnerDataArray[index].twitch.uri.replace("http://www.twitch.tv/","");
         }
         else {
-            twitchUrl = "---";
+            twitchUrl = runnerDataArray[index].names.international;
         }
+		if (twitchUrl == "") {
+			twitchUrl = runnerDataArray[index].names.international;
+		}
+		
+		if (sceneID === '4_3-1player') {
+			if (twitchUrl.indexOf('twitch.tv/') === 0) {
+				twitchUrl = twitchUrl.substr(0, 10) + '<br>' + twitchUrl.substr(10);
+			}
+			
+			else {
+				twitchUrl = '<div style="padding-top:17px;">' + twitchUrl + '</div>'
+			}
+		}
+		
         return twitchUrl;
     }
 
@@ -136,21 +156,22 @@ $(function () {
     }
 
     function displayTwitchInstead() {
-        var indexesToNotUpdate = [];
         $runnerInfoElements.each(function(index,element) {
-            if(getRunnerInformationTwitch(runDataActiveRunRunnerListReplicant.value,index) == '---') {
-                indexesToNotUpdate.push(index);
-            }
-            else {
-                animation_setGameFieldAlternate($(this), getRunnerInformationTwitch(runDataActiveRunRunnerListReplicant.value, index));
-            }
+            animation_setGameFieldAlternate($(this), getRunnerInformationTwitch(runDataActiveRunRunnerListReplicant.value, index));
+			setTimeout(function() {
+				if (sceneID === '4_3-1player') {
+					$(element).css('line-height', 'normal');
+					$(element).css('padding-top', '13px');
+				}
+			}, 500);
         });
 
         var tm = new TimelineMax({paused: true});
-        $twitchLogos.each( function(index, element) {
-            if($.inArray(index, indexesToNotUpdate) == -1) {
-                animation_showZoomIn($(this));
-            }
+        $runnerLogos.each( function(index, element) {
+			//animation_showZoomIn($(this));
+			$(this).fadeOut(500, function() {
+				$(this).removeClass('nameLogo').addClass('twitchLogo').fadeIn(500);
+			});
         });
 
         tm.play();
@@ -158,20 +179,21 @@ $(function () {
     }
 
     function hideTwitch() {
-        var indexesToNotUpdate = [];
         $runnerInfoElements.each( function(index,element) {
-            if(getRunnerInformationTwitch(runDataActiveRunRunnerListReplicant.value,index) == '---') {
-                indexesToNotUpdate.push(index);
-            }
-            else {
-                animation_setGameFieldAlternate($(this), getRunnerInformationName(runDataActiveRunRunnerListReplicant.value, index));
-            }
+			animation_setGameFieldAlternate($(this), getRunnerInformationName(runDataActiveRunRunnerListReplicant.value, index));
+			setTimeout(function() {
+				if (sceneID === '4_3-1player') {
+					$(element).css('line-height', '99px');
+					$(element).css('padding-top', '0');
+				}
+			}, 500);
         });
 
-        $twitchLogos.each( function(index, element) {
-            if($.inArray(index, indexesToNotUpdate) == -1) {
-                animation_hideZoomOut($(this));
-            }
+        $runnerLogos.each( function(index, element) {
+			//animation_hideZoomOut($(this));
+			$(this).fadeOut(500, function() {
+				$(this).removeClass('twitchLogo').addClass('nameLogo').fadeIn(500);
+			});
         });
 
         timeoutTwitch = setTimeout(displayTwitchInstead,intervalToNextTwitchDisplay);
@@ -232,9 +254,9 @@ $(function () {
         hideTimerFinished(index);
     });
 
-    $twitchLogos.each( function(index, element) {
+    /*$runnerLogos.each( function(index, element) {
         $(this).css('transform', 'scale(0)');
-    });
+    });*/
 
     $gameCaptures.each(function () {
         var aspectRatioMultiplier = getAspectRatio($(this).attr('aspect-ratio'));

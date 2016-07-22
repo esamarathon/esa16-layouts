@@ -52,7 +52,7 @@ $(function () {
                        }
 
                        if(run.data[2] == null) {
-                           console.warn("Run Number " + itemCounter + " does not have any value for \"Twitch User\". This might be ok, continuing import");
+                           console.warn("Run Number " + itemCounter + " does not have any value for \"Category\". This might be ok, continuing import");
                        }
 
                        if(run.data[3] == null) {
@@ -60,15 +60,15 @@ $(function () {
                        }
 
                        if(run.data[4] == null) {
-                           console.warn("Run Number " + itemCounter + " does not have any value for \"Category\". This might be ok, continuing import");
+                           console.warn("Run Number " + itemCounter + " does not have any value for \"Twitch User\". This might be ok, continuing import");
                        }
 
                     }
                     var runData = createRunData();
                     runData.game = run.data[0];
                     runData.estimate = msToTime(run.length_t);
-                    if(run.data[4] != null) {
-                        runData.category = run.data[4];
+                    if(run.data[2] != null) {
+                        runData.category = run.data[2];
                     }
                     else {
                         runData.category ="";
@@ -83,9 +83,9 @@ $(function () {
 
                     runData.region = "";
 
-                    var twitchLinksList = run.data[2];
+                    var twitchLinksList = run.data[4];
                     if (twitchLinksList != null) {
-                        twitchLinksList = twitchLinksList.split(",");
+                        twitchLinksList = twitchLinksList.split(", ");
                     }
                     var runnerList = run.data[1].split(",");
                     runnerList.forEach(
@@ -95,7 +95,8 @@ $(function () {
                             player.names.international = name.replace(' ', '');
                             if (twitchLinksList != null && twitchLinksList[index] != null && twitchLinksList[index] != "") {
                                 player.twitch = {};
-                                player.twitch.uri = "http://www.twitch.tv/" + twitchLinksList[index].replace(' ', '');
+								var username = twitchLinksList[index].match(/\[(.*?)\]/)[1];
+                                player.twitch.uri = "http://www.twitch.tv/" + username;
                             }
                             runData.players.push(player);
                         });
@@ -116,9 +117,6 @@ $(function () {
         theRun.system = "";
         theRun.region = "";
         theRun.category = "";
-        theRun.screens = new Array();
-        theRun.cameras = new Array();
-        theRun.teams = new Array();
         return theRun;
     }
 
@@ -162,3 +160,4 @@ $(function () {
         return hours + ':' + minutes;
     }
 })
+

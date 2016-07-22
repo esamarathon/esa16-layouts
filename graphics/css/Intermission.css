@@ -1,116 +1,76 @@
-@font-face {
-    font-family: 'FFFForward';
-    src: url('../images/FFFFORWA.TTF') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+#layoutImage {
+	background-image: url('../images/intermission.png');
 }
 
-body {
-    overflow: hidden;
-    margin: 0px;
-    padding: 0px;
+#webcam1 {
+	width: 1498px;
+	height: 844px;
+	left: 209px;
+	top: 12px;
 }
 
-#window-container {
-    background-image: url('../images/Intermission.png');
-    width: 1280px;
-    height: 720px;
-    overflow: hidden;
-    margin: 0px;
-    padding: 0px;
-    background-color: #000000;
+#intermissionHosts {
+	position: fixed;
+	width: 1920px;
+	height: 53px;
+	line-height: 53px;
+	text-align: center;
+	font-size: 40px;
+	left: 0px;
+	top: 861px;
 }
 
-#comingUp {
-    font-family: FFFForward;
-    color: #856899;
-    font-size: 20px;
-    text-align: right;
-    padding-bottom: 15px;
-    width: 400px;
+.runInformationFields {
+	overflow: hidden;
+	box-sizing: border-box;
+	padding-left: 7px;
+	padding-top: 2px;
+	width: 100%;
 }
 
-#justMissed {
-    font-family: FFFForward;
-    color: #856899;
-    font-size: 20px;
-    padding-bottom: 15px;
-    width: 400px;
+.runInformationWrapper {
+	width: 1920px;
+	height: 54px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	position: fixed;
+	/*background-color: rgba(69,69,69,0.7);*/
 }
 
-#comingUpRun {
-    position: absolute;
-    font-family: FFFForward;
-    font-size: 14px;
-    display: flex;
-    flex-flow: row wrap;
-    width: 400px;
-}
-
-#justMissedRun {
-    position: absolute;
-    font-family: FFFForward;
-    display: flex;
-    flex-flow: row wrap;
-    font-size: 14px;
-    width: 400px;
-}
-
-
-#informationMarquee {
-    font-family: FFFForward;
-    color: #856899;
-    position: absolute;
-    top: 500px;
-    left: 0px;
-    height: 0px;
-    width: 1280px;
-    overflow:hidden;
-    white-space: nowrap;
-    background-color: rgba(0,0,0,0.5);
-    opacity: 0;
-    font-size: 15px;
-    text-align: center;
-}
-
-#comingUpGame {
-    padding: 2px;
-    color: #856899;
-    width: 400px;
-    background: #362b41;
-}
-
-#comingUpSystem {
-    padding-right: 5px;
-    color: #856899;
-    width: 100px;
-    text-align: right;
-    background: #271e2f;
-}
-#comingUpCathegory {
-    padding: 2px;
-    color: #856899;
-    width: 220px;
-    background: #271e2f;
+#justMissedRunContainer .runInformationWrapper {
+	left: 0px;
+	top: 972px;
 }
 
 #justMissedGame {
-    padding: 2px;
-    color: #856899;
-    width: 400px;
-    background: #362b41;
+	font-size: 40px;
+	text-align: left;
+	padding-left: 10px;
 }
 
-#justMissedSystem {
-    padding-right: 5px;
-    color: #856899;
-    width: 100px;
-    text-align: right;
-    background: #271e2f;
+#comingUpRunContainer .runInformationWrapper {
+	left: 0px;
+	top: 972px;
 }
-#justMissedCathegory {
-    padding: 2px;
-    color: #856899;
-    width: 220px;
-    background: #271e2f;
+
+#comingUpGame {
+	font-size: 40px;
+	text-align: right;
+	padding-right: 10px;
 }
+
+/*#informationMarquee {
+	position: fixed;
+	top: 1080px;
+	left: 0px;
+	height: 59px;
+	opacity: 0;
+	width: 1920px;
+	overflow: hidden;
+	white-space: nowrap;
+	background-color: rgba(69,69,69,0.7);
+	font-size: 26px;
+	line-height: 59px;
+	text-align: center;
+}*/

@@ -1,49 +1,42 @@
-<html data-sceneid="Intermission">
+<html data-sceneid="intermission">
 <head>
-    <link href="css/common.css" rel="stylesheet"/>
-    <link href="css/Intermission.css" rel="stylesheet"/>
-    <script src="components/gsap/src/minified/TweenMax.min.js"></script>
-    <script src="components/jquery/dist/jquery.min.js"></script>
-    <script src="js/editmode.js"></script>
-    <script src="js/animation.js"></script>
-    <script src="js/Intermission.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <style>
-
-    </style>
+	<link href="css/common.css" rel="stylesheet"/>
+	<link href="css/intermission.css" rel="stylesheet"/>
+	<script src="components/gsap/src/minified/TweenMax.min.js"></script>
+	<script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/editmode.js"></script>
+	<script src="js/animation.js"></script>
+	<script src="js/Intermission.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
 </head>
 <body>
 <div id="window-container">
-    <div id="positionDebug">
-        <div id="positionDebugText">
-            X: 100
-            Y: 100
-        </div>
-        <div id="editModeButtons">
-            <button id="generateCSSContentButton">Save Layout</button>
-            <button id="resetCSSContentButton">Reset Layout</button>
-        </div>
-    </div>
-    <div id="comingUpRun" class="positionable">
-        <div id="comingUp">
-            Coming up..
-        </div>
-        <div id="comingUpGame"> </div>
-        <div id="comingUpCathegory"> </div>
-        <div id="comingUpSystem"> </div>
-        <div id="comingUpPlayer"> </div>
-    </div>
-    <div id="justMissedRun" class="positionable">
-        <div id="justMissed">
-            You just missed..
-        </div>
-        <div id="justMissedGame"> </div>
-        <div id="justMissedCathegory"> </div>
-        <div id="justMissedSystem"> </div>
-        <div id="justMissedPlayer"> </div>
-    </div>
-    <div id="informationMarquee" class="positionable">
-    </div>
+	<div id="layoutImage"></div>
+	<div id="webcam1" class="webcam"></div>
+	<div id="intermissionHosts"></div>
+	
+	<!-- just missed -->
+	<div id="justMissedRunContainer">
+		<div class="runInformationWrapper">
+			<div class="runInformationFields">
+				<div id="justMissedGame"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- coming up -->
+	<div id="comingUpRunContainer">
+		<div class="runInformationWrapper">
+			<div class="runInformationFields">
+				<div id="comingUpGame"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="donationTotal">$0.00</div>
+    <!--<div id="informationMarquee"></div>-->
 </div>
 </body>
 </html>
