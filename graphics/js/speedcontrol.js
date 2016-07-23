@@ -31,11 +31,12 @@ $(function () {
 	var g4gDonationTotalReplicant = nodecg.Replicant('g4gDonationTotal', {persistent: false, defaultValue: '0.00'});
 	g4gDonationTotalReplicant.on("change", function(oldValue, newValue) {
 		// If the page has just been loaded, just print the current value.
-		if (!oldValue || oldValue === newValue) {
+		//if (!oldValue || oldValue === newValue || !donationInit) {
 			$donationTotal.html('$' + newValue);
-		}
+			//donationInit = true;
+		//}
 		
-		else {
+		/*else {
 			var decimal_places = 2;
 			var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
 			
@@ -59,7 +60,7 @@ $(function () {
 				},
 				5000
 			  );
-		}
+		}*/
 	});
 
     var stopWatchesReplicant = nodecg.Replicant('stopwatches');

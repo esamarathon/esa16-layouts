@@ -49,18 +49,18 @@ $(function () {
 		}
 	});
 	
-	var donationInit = false;
+	//var donationInit = false;
 	
 	// Stuff to update the donation total on screen with an animation.
 	var g4gDonationTotalReplicant = nodecg.Replicant('g4gDonationTotal', {persistent: false, defaultValue: '0.00'});
 	g4gDonationTotalReplicant.on("change", function(oldValue, newValue) {
 		// If the page has just been loaded, just print the current value.
-		if (!oldValue || oldValue === newValue || !donationInit) {
+		//if (!oldValue || oldValue === newValue || !donationInit) {
 			$donationTotal.html('$' + newValue);
-			donationInit = true;
-		}
+			//donationInit = true;
+		//}
 		
-		else {
+		/*else {
 			var decimal_places = 2;
 			var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
 			
@@ -84,7 +84,7 @@ $(function () {
 				},
 				5000
 			  );
-		}
+		}*/
 	});
 	
 	nodecg.listenFor("forceRefreshIntermission", function() {
