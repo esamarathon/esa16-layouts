@@ -1,0 +1,120 @@
+#layoutImage {
+	background-image: url('../images/16-9-4player.png');
+}
+
+.gameCapture {
+	width: 874px;
+	height: 433px;
+}
+
+#gameCapture1 {
+	left: 45px;
+	top: 52px;
+}
+
+#gameCapture2 {
+	left: 993px;
+	top: 52px;
+}
+
+#gameCapture3 {
+	left: 45px;
+	top: 483px;
+}
+
+#gameCapture4 {
+	left: 993px;
+	top: 483px;
+}
+
+#runInformationGameName {
+	position: fixed;
+	width: 960px;
+	height: 53px;
+	left: 0px;
+	top: 970px;
+	font-size: 40px;
+	line-height: 53px;
+	text-align: center;
+}
+
+#runInformationGameCategory {
+	position: fixed;
+	width: 640px;
+	height: 53px;
+	left: 1280px;
+	top: 970px;
+	font-size: 40px;
+	line-height: 53px;
+	text-align: center;
+}
+
+#runInformationGameSystem {
+	position: fixed;
+	width: 320px;
+	height: 53px;
+	left: 960px;
+	top: 970px;
+	font-size: 40px;
+	line-height: 53px;
+	text-align: center;
+}
+
+.playerContainer {
+	width: 544px;
+	height: 54px;
+}
+
+#player1Container {
+	left: 0px;
+	top: -1px;
+}
+
+#player2Container {
+	left: 1376px;
+	top: -1px;
+}
+
+#player3Container {
+	left: 0px;
+	top: 916px;
+}
+
+#player4Container {
+	left: 1376px;
+	top: 916px;
+}
+
+.runnerLogo {
+	width: 40px;
+	margin-right: 12px;
+	margin-left: 6px;
+}
+
+.runnerInfo {
+	font-size: 45px;
+	line-height: 54px;
+	box-sizing: border-box;
+	padding-left: 10px;
+	text-align: center;
+}
+
+#timer {
+	position: fixed;
+	font-size: 40px;
+	width: 416px;
+	height: 52px;
+	left: 960px;
+	top: 0px;
+	line-height: 52px;
+}
+
+#runInformationGameEstimate {
+	position: fixed;
+	font-size: 40px;
+	width: 416px;
+	height: 52px;
+	left: 544px;
+	top: 0px;
+	line-height: 52px;
+}

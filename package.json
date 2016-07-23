@@ -24,25 +24,9 @@
         "file": "intermission.html",
         "width": 1920,
         "height": 1080
-      },{
-        "file": "4_3-1player.html",
-        "width": 1920,
-        "height": 1080
-      },{
-        "file": "gba-1player.html",
-        "width": 1920,
-        "height": 1080
-      },{
-        "file": "gb-1player.html",
-        "width": 1920,
-        "height": 1080
-      },{
-        "file": "3dss-1player.html",
-        "width": 1920,
-        "height": 1080
       },
 	  {
-        "file": "16_9-1player.html",
+        "file": "4_3-1player.html",
         "width": 1920,
         "height": 1080
       },
@@ -52,7 +36,62 @@
         "height": 1080
       },
 	  {
+        "file": "4_3-3player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "4_3-4player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
         "file": "16_9-2player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "16_9-3player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "16_9-4player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "dsd-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "gba-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "gb-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "3dss-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "3dsd-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "16_9p-1player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
+        "file": "16_9g-1player.html",
         "width": 1920,
         "height": 1080
       }
