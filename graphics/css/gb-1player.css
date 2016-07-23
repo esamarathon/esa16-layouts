@@ -3,17 +3,17 @@
 }
 
 #gameCapture1 {
-	width: 1064px;
+	width: 883px;
 	height: 795px;
-	left: 0px;
+	left: 49px;
 	top: 0px;
 }
 
 #webcam1 {
-	width: 861px;
-	height: 487px;
-	left: 1059px;
-	top: 113px;
+	width: 993px;
+	height: 560px;
+	left: 927px;
+	top: 118px;
 }
 
 #webcam2 {
@@ -57,10 +57,10 @@
 }
 
 .playerContainer {
-	width: 856px;
+	width: 988px;
 	height: 54px;
-	left: 1064px;
-	top: 600px;
+	left: 932px;
+	top: 677px;
 }
 
 .runnerLogo {

@@ -28,6 +28,18 @@
         "file": "4_3-1player.html",
         "width": 1920,
         "height": 1080
+      },{
+        "file": "gba-1player.html",
+        "width": 1920,
+        "height": 1080
+      },{
+        "file": "gb-1player.html",
+        "width": 1920,
+        "height": 1080
+      },{
+        "file": "3dss-1player.html",
+        "width": 1920,
+        "height": 1080
       },
 	  {
         "file": "16_9-1player.html",

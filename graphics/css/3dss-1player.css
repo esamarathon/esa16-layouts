@@ -3,24 +3,24 @@
 }
 
 #gameCapture1 {
-	width: 1064px;
-	height: 795px;
+	width: 1195px;
+	height: 720px;
 	left: 0px;
-	top: 0px;
+	top: 33px;
 }
 
 #webcam1 {
-	width: 861px;
-	height: 487px;
-	left: 1059px;
-	top: 113px;
+	width: 729px;
+	height: 413px;
+	left: 1191px;
+	top: 186px;
 }
 
 #webcam2 {
 	width: 412px;
-	height: 237px;
+	height: 232px;
 	left: 754px;
-	top: 790px;
+	top: 795px;
 }
 
 #runInformationGameName {
@@ -57,10 +57,10 @@
 }
 
 .playerContainer {
-	width: 856px;
+	width: 732px;
 	height: 54px;
-	left: 1064px;
-	top: 600px;
+	left: 1195px;
+	top: 599px;
 }
 
 .runnerLogo {

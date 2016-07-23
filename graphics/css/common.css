@@ -38,13 +38,6 @@ body {
 	padding: 0px;
 }
 
-#dreamhackSpeedrunsLogo {
-	position: fixed;
-	background-image: url('../images/DreamhackSpeedrunsLogo.png');
-	background-repeat: no-repeat;
-	background-size: 100%;
-}
-
 #esaLogo {
 	position: fixed;
 	background-image: url('../images/ESALogo.png');
@@ -83,13 +76,14 @@ body {
 	overflow: hidden;
 }
 
-#runInformationGameSystem {
-	color: #bfbfbf;
-}
-
 .playerContainer {
 	position: fixed;
 	display: flex;
+	background-color: purple;
+	color: white;
+	background-image: url('../images/purple-back.png');
+	background-size: auto;
+	background-repeat:repeat;
 }
 
 .runnerLogo {
@@ -113,11 +107,6 @@ body {
 	overflow: hidden;
 	letter-spacing: -1.5px;
 	white-space: nowrap;
-}
-
-#timerContainer {
-	position: fixed;
-	/*background-color: rgba(69,69,69,0.7);*/
 }
 
 #timer {

@@ -49,6 +49,7 @@ $(function () {
 		}
 	});
 	
+	// Stuff to update the donation total on screen with an animation.
 	var g4gDonationTotalReplicant = nodecg.Replicant('g4gDonationTotal', {persistent: false, defaultValue: '0.00'});
 	g4gDonationTotalReplicant.on("change", function(oldValue, newValue) {
 		// If the page has just been loaded, just print the current value.

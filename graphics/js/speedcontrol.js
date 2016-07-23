@@ -11,6 +11,7 @@ $(function () {
     var $runInformationName = $('#runInformationGameName');
     var $runnerLogos = $('.runnerLogo');
     var $gameCaptures = $('.gameCapture');
+	var $donationTotal = $('#donationTotal');
 
     var currentTime = '';
     var displayTwitchforMilliseconds = 15000;
@@ -25,6 +26,41 @@ $(function () {
     nodecg.listenFor("resetTime", resetAllPlayerTimers);
     nodecg.listenFor('timerReset', resetTimer);
     nodecg.listenFor('timerSplit', splitTimer);
+	
+	// Stuff to update the donation total on screen with an animation.
+	var g4gDonationTotalReplicant = nodecg.Replicant('g4gDonationTotal', {persistent: false, defaultValue: '0.00'});
+	g4gDonationTotalReplicant.on("change", function(oldValue, newValue) {
+		// If the page has just been loaded, just print the current value.
+		if (!oldValue || oldValue === newValue) {
+			$donationTotal.html('$' + newValue);
+		}
+		
+		else {
+			var decimal_places = 2;
+			var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
+			
+			$('#donationTotal')
+			  .prop('number', parseFloat(oldValue))
+			  .animateNumber(
+				{
+				  number: parseFloat(newValue) * decimal_factor,
+
+				  numberStep: function(now, tween) {
+					var floored_number = Math.floor(now) / decimal_factor,
+						target = $(tween.elem);
+
+					if (decimal_places > 0) {
+					  // force decimal places even if they are 0
+					  floored_number = floored_number.toFixed(decimal_places);
+					}
+
+					target.text('$' + floored_number);
+				  }
+				},
+				5000
+			  );
+		}
+	});
 
     var stopWatchesReplicant = nodecg.Replicant('stopwatches');
     stopWatchesReplicant.on('change', function(oldVal, newVal) {
@@ -53,12 +89,12 @@ $(function () {
 
         $runnerInfoElements.each( function( index, element ) {
             animation_setGameFieldAlternate($(this),getRunnerInformationName(newValue,index));
-				setTimeout(function() {
+				/*setTimeout(function() {
 				if (sceneID === '4_3-1player') {
 					$(element).css('line-height', '99px');
 					$(element).css('padding-top', '0');
 				}
-			}, 500);
+			}, 500);*/
         });
 		
         $runnerLogos.each( function(index, element) {
@@ -123,7 +159,7 @@ $(function () {
 			twitchUrl = runnerDataArray[index].names.international;
 		}
 		
-		if (sceneID === '4_3-1player') {
+		/*if (sceneID === '4_3-1player') {
 			if (twitchUrl.indexOf('twitch.tv/') === 0) {
 				twitchUrl = twitchUrl.substr(0, 10) + '<br>' + twitchUrl.substr(10);
 			}
@@ -131,7 +167,7 @@ $(function () {
 			else {
 				twitchUrl = '<div style="padding-top:17px;">' + twitchUrl + '</div>'
 			}
-		}
+		}*/
 		
         return twitchUrl;
     }
@@ -158,12 +194,12 @@ $(function () {
     function displayTwitchInstead() {
         $runnerInfoElements.each(function(index,element) {
             animation_setGameFieldAlternate($(this), getRunnerInformationTwitch(runDataActiveRunRunnerListReplicant.value, index));
-			setTimeout(function() {
+			/*setTimeout(function() {
 				if (sceneID === '4_3-1player') {
 					$(element).css('line-height', 'normal');
 					$(element).css('padding-top', '13px');
 				}
-			}, 500);
+			}, 500);*/
         });
 
         var tm = new TimelineMax({paused: true});
@@ -181,12 +217,12 @@ $(function () {
     function hideTwitch() {
         $runnerInfoElements.each( function(index,element) {
 			animation_setGameFieldAlternate($(this), getRunnerInformationName(runDataActiveRunRunnerListReplicant.value, index));
-			setTimeout(function() {
+			/*setTimeout(function() {
 				if (sceneID === '4_3-1player') {
 					$(element).css('line-height', '99px');
 					$(element).css('padding-top', '0');
 				}
-			}, 500);
+			}, 500);*/
         });
 
         $runnerLogos.each( function(index, element) {
