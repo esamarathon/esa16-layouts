@@ -240,10 +240,14 @@ $(function () {
 		
 		// Gets Twitch channel names from the runData and puts them in an array to send to the FFZ WS script.
 		var twitchNames = [];
+		var playerNames = [];
 		for (var i = 0; i < runData.players.length; i++) {
 			var twitchName = (runData.players[i].twitch) ? runData.players[i].twitch.uri.replace('http://www.twitch.tv/', '') : undefined;
 			if (twitchName) {twitchNames.push(twitchName);}
+			playerNames.push(runData.players[i].name.international);
 		}
+		
+		requestObject.channel.status = 'Raising money for Save the Children - ' + runData.game + ' by ' + playerNames.join(', ');
 		
 		nodecg.sendMessage('updateFFZFollowing', twitchNames);
         nodecg.sendMessage('updateChannel', requestObject);
