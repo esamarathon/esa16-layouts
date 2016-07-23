@@ -62,32 +62,18 @@ $(function () {
         playerTimer_SetTime(time);
     });
 
-    var runDataActiveRunReplicant = nodecg.Replicant("runDataActiveRun");
-    runDataActiveRunReplicant.on('change', function( oldValue, newValue) {
-        if( typeof newValue !== 'undefined' && newValue !== '' ) {
-
-            if( newValue.teams.length <= 1 && newValue.players.length < 2 ) {
-                moreThanOnePlayer = false;
+    var runDataActiveRunRunnerListReplicant = nodecg.Replicant("runDataActiveRunRunnerList");
+    runDataActiveRunRunnerListReplicant.on("change", function (oldValue, newValue) {
+        if (typeof newValue !== 'undefined' && newValue != '') {
+            playerTimer_UpdateTimers(newValue);
+            if(newValue.length > 1) {
+                moreThanOnePlayer = true;
             }
             else {
-              moreThanOnePlayer = true;
+                moreThanOnePlayer = false;
             }
-            playerTimer_UpdateTimers(newValue);
         }
     });
-    //
-    var runDataActiveRunRunnerListReplicant = nodecg.Replicant("runDataActiveRunRunnerList");
-    // runDataActiveRunRunnerListReplicant.on("change", function (oldValue, newValue) {
-    //     if (typeof newValue !== 'undefined' && newValue != '') {
-    //         playerTimer_UpdateTimers(newValue);
-    //         if(newValue.length > 1) {
-    //             moreThanOnePlayer = true;
-    //         }
-    //         else {
-    //             moreThanOnePlayer = false;
-    //         }
-    //     }
-    // });
 
     var finishedTimersReplicant = nodecg.Replicant('finishedTimers');
     finishedTimersReplicant.on('change', function(oldValue, newValue) {
@@ -218,20 +204,9 @@ $(function () {
         $timer.html(timeHTML);
     }
 
-    function playerTimer_UpdateTimers(run) {
-        var players = run.players;
+    function playerTimer_UpdateTimers(players) {
         var toolbarPlayerSpecificHtml = '';
-        if ( run.teams.length > 1 ) {
-          $.each(run.teams, function( index, value ) {
-            toolbarPlayerSpecificHtml += "" +
-                '<div id="toolbar' + index + '" class="ui-widget-header ui-corner-all">' +
-                '<button id="split' + index + '" class="personalSplitButton">split</button>' +
-                '<button id="resetTime' + index + '" class="personalResetButton">reset</button>' +
-                " " + value.name +
-                '</div>';
-          });
-        }
-        else if (run.teams.length < 1 && players.length > 1) {
+        if (players.length > 1) {
             $.each(players, function (index, value) {
                 toolbarPlayerSpecificHtml += "" +
                     '<div id="toolbar' + index + '" class="ui-widget-header ui-corner-all">' +
@@ -240,10 +215,8 @@ $(function () {
                     " " + value.names.international +
                     '</div>';
             });
-        }
-        if( moreThanOnePlayer ) {
             $('#playerSpecificToolbar').html(toolbarPlayerSpecificHtml);
-			      $('#playerTimersHeader').show();
+			$('#playerTimersHeader').show();
 
             $('.personalSplitButton').click(function () {
                 var index = $(this).attr('id').replace('split', '');
@@ -280,7 +253,7 @@ $(function () {
         }
         else {
             $('#playerSpecificToolbar').html(toolbarPlayerSpecificHtml);
-			      $('#playerTimersHeader').hide();
+			$('#playerTimersHeader').hide();
         }
         splitsBeforeStoppingMainTimer = players.length;
     }
