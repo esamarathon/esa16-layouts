@@ -133,7 +133,7 @@ body {
 #runInformationGameEstimate {
 	position: relative;
 	text-align: center;
-	color: #bfbfbf;
+	color: white;
 }
 
 #runInformationGameEstimate:before {

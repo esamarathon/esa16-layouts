@@ -244,7 +244,7 @@ $(function () {
 		for (var i = 0; i < runData.players.length; i++) {
 			var twitchName = (runData.players[i].twitch) ? runData.players[i].twitch.uri.replace('http://www.twitch.tv/', '') : undefined;
 			if (twitchName) {twitchNames.push(twitchName);}
-			playerNames.push(runData.players[i].name.international);
+			playerNames.push(runData.players[i].names.international);
 		}
 		
 		requestObject.channel.status = 'Raising money for Save the Children - ' + runData.game + ' by ' + playerNames.join(', ');
