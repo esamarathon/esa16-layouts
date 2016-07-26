@@ -55,7 +55,7 @@ body {
 .gameCapture, .webcam {
 	position: fixed;
 	background-color: #00DD00;
-	border: 5px solid #a84300;
+	border: 5px solid #612c7c;
 	box-sizing: border-box;
 }
 
@@ -127,7 +127,7 @@ body {
 }
 
 .timer_finished {
-	color: #ff6600;
+	color: #42ff0f;
 }
 
 #runInformationGameEstimate {
@@ -149,6 +149,17 @@ body {
 	display: flex;
 	overflow: hidden;
 	align-items: center;
+	background-color: #612c7c;
+	padding-right: 10px;
+	padding-left: 10px;
+	height: 70px;
+	color: white;
+}
+
+.runnerTimerFinished {
+	
+	line-height: 70px;
+	font-size: 35px;
 }
 
 .finishedLogo {
@@ -158,6 +169,15 @@ body {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%;
+	width: 60px;
+}
+
+#runner1TimerFinishedContainer .runnerTimerFinished, #runner3TimerFinishedContainer .runnerTimerFinished {
+	margin-left: 10px;
+}
+
+#runner2TimerFinishedContainer .runnerTimerFinished, #runner4TimerFinishedContainer .runnerTimerFinished {
+	margin-right: 10px;
 }
 
 #donationTotal {

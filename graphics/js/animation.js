@@ -56,6 +56,32 @@ function animation_showZoomIn($selector) {
     tm.play();
 }
 
+function animation_updateDonationTotal($selector, oldTotal, newTotal) {
+	var decimal_places = 2;
+	var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
+
+	$selector
+	  .prop('number', parseFloat(oldTotal) * decimal_factor)
+	  .animateNumber(
+		{
+		  number: parseFloat(newTotal) * decimal_factor,
+
+		  numberStep: function(now, tween) {
+			var floored_number = Math.floor(now) / decimal_factor,
+				target = $(tween.elem);
+
+			if (decimal_places > 0) {
+			  // force decimal places even if they are 0
+			  floored_number = floored_number.toFixed(decimal_places);
+			}
+
+			target.text('$' + numberWithCommas(floored_number));
+		  }
+		},
+		5000
+	  );
+}
+
 // General functions ###
 function removeWillChange($selector) {
     $selector.css('will-change','');
@@ -63,4 +89,9 @@ function removeWillChange($selector) {
 
 function applyWillChange($selector) {
     $selector.css('will-change', 'transform, opacity');
+}
+
+// Source: http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

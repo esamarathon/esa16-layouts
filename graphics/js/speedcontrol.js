@@ -17,6 +17,7 @@ $(function () {
     var displayTwitchforMilliseconds = 15000;
     var intervalToNextTwitchDisplay = 120000;
     var timeoutTwitch = null;
+	var donationInit = false;
 
     // sceneID must be uniqe for this view, it's used in positioning of elements when using edit mode
     // if there are two views with the same sceneID all the elements will not have the correct positions
@@ -31,36 +32,14 @@ $(function () {
 	var g4gDonationTotalReplicant = nodecg.Replicant('g4gDonationTotal', {persistent: false, defaultValue: '0.00'});
 	g4gDonationTotalReplicant.on("change", function(oldValue, newValue) {
 		// If the page has just been loaded, just print the current value.
-		//if (!oldValue || oldValue === newValue || !donationInit) {
-			$donationTotal.html('$' + newValue);
-			//donationInit = true;
-		//}
+		if (!donationInit) {
+			$donationTotal.html('$' + numberWithCommas(parseFloat(newValue)));
+			donationInit = true;
+		}
 		
-		/*else {
-			var decimal_places = 2;
-			var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
-			
-			$('#donationTotal')
-			  .prop('number', parseFloat(oldValue))
-			  .animateNumber(
-				{
-				  number: parseFloat(newValue) * decimal_factor,
-
-				  numberStep: function(now, tween) {
-					var floored_number = Math.floor(now) / decimal_factor,
-						target = $(tween.elem);
-
-					if (decimal_places > 0) {
-					  // force decimal places even if they are 0
-					  floored_number = floored_number.toFixed(decimal_places);
-					}
-
-					target.text('$' + floored_number);
-				  }
-				},
-				5000
-			  );
-		}*/
+		else {
+			animation_updateDonationTotal($donationTotal, oldValue, newValue);
+		}
 	});
 
     var stopWatchesReplicant = nodecg.Replicant('stopwatches');
@@ -189,7 +168,7 @@ $(function () {
 
     function splitTimer(index) {
         $runnerTimerFinishedElements.eq(index).html(currentTime);
-        animation_fadeInOpacity($runnerTimerFinishedContainers.eq(index));
+        $runnerTimerFinishedContainers.eq(index).css("opacity","1");
     }
 
     function displayTwitchInstead() {

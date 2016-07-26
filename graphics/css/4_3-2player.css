@@ -105,3 +105,13 @@
 	top: 660px;
 	line-height: 69px;
 }
+
+#runner1TimerFinishedContainer {
+	left: 102px;
+	top: 532px;
+}
+
+#runner2TimerFinishedContainer {
+	left: 1598px;
+	top: 532px;
+}
