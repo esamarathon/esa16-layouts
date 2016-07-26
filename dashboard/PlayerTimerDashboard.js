@@ -74,7 +74,7 @@ $(function () {
             }
         }
     });
-
+	
     var finishedTimersReplicant = nodecg.Replicant('finishedTimers');
     finishedTimersReplicant.on('change', function(oldValue, newValue) {
         if(typeof newValue != 'undefined' && newValue != '') {
@@ -357,6 +357,10 @@ $(function () {
         nodecg.listenFor("split_timer", "nodecg-speedcontrol", function(id) {
             console.log("SPLIT-EVENT");
             console.log(id);
+            if (moreThanOnePlayer) {
+                nodecg.sendMessage('timerSplit', id);
+            }
+            nodecg.sendMessage('timerSplit', id);
             splitTimer(id);
         })
     }
