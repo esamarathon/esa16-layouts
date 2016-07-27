@@ -233,25 +233,60 @@ $(function () {
                 "exchange username with the twitch username which you want to access");
             return;
         }
-
-        var requestObject = {};
-        requestObject.channel = {};
-        requestObject.channel.game = runData.game;
 		
-		// Gets Twitch channel names from the runData and puts them in an array to send to the FFZ WS script.
-		var twitchNames = [];
-		var playerNames = [];
-		for (var i = 0; i < runData.players.length; i++) {
-			var twitchName = (runData.players[i].twitch) ? runData.players[i].twitch.uri.replace('http://www.twitch.tv/', '') : undefined;
-			if (twitchName) {twitchNames.push(twitchName);}
-			playerNames.push(runData.players[i].names.international);
-		}
-		
-		requestObject.channel.status = 'Raising money for Save the Children - ' + runData.game + ' by ' + playerNames.join(', ');
-		
-		nodecg.sendMessage('updateFFZFollowing', twitchNames);
-        nodecg.sendMessage('updateChannel', requestObject);
+		getTwitchGameNameFromSRC(runData, function(twitchGameName) {
+			var requestObject = {};
+			requestObject.channel = {};
+			
+			if (twitchGameName) {
+				requestObject.channel.game = twitchGameName;
+			}
+			
+			else {
+				requestObject.channel.game = runData.game;
+			}
+			
+			// Gets Twitch channel names from the runData and puts them in an array to send to the FFZ WS script.
+			var twitchNames = [];
+			var playerNames = [];
+			for (var i = 0; i < runData.players.length; i++) {
+				var twitchName = (runData.players[i].twitch) ? runData.players[i].twitch.uri.replace('http://www.twitch.tv/', '') : undefined;
+				if (twitchName) {twitchNames.push(twitchName);}
+				playerNames.push(runData.players[i].names.international);
+			}
+			
+			requestObject.channel.status = 'Raising money for Save the Children - ' + runData.game + ' by ' + playerNames.join(', ');
+			
+			nodecg.sendMessage('updateFFZFollowing', twitchNames);
+			nodecg.sendMessage('updateChannel', requestObject);
+			
+			if (!twitchGameName) {
+				alert("Game not found on speedrun.com, check that the game set on Twitch is a game available in the directory.");
+			}
+		});
     }
+	
+	function getTwitchGameNameFromSRC(runData, callback) {
+		$.ajax({
+			url: "https://www.speedrun.com/api/v1/games?name=" + runData.game + "&limit=1",
+			dataType: "jsonp",
+			data: {
+				q: runData.game
+			},
+			success: function(result) {
+				var twitchGameName;
+				
+				if (result.data.length > 0) {
+					twitchGameName = result.data[0].names.twitch;
+				}
+				
+				callback(twitchGameName);
+			},
+			error: function() {
+				callback(undefined);
+			}
+		});
+	}
 
     function runPlayer_playNextRun() {
         var activeGame = runDataActiveRunReplicant.value;

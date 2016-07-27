@@ -140,7 +140,7 @@ $(function () {
 
         $("#playerControlGame").autocomplete({
             source: function (request, response) {
-                var urlRequest = "http://www.speedrun.com/api/v1/games?name=" + request.term;
+                var urlRequest = "https://www.speedrun.com/api/v1/games?name=" + request.term;
                 $.ajax({
                     url: urlRequest,
                     dataType: "jsonp",
@@ -164,7 +164,7 @@ $(function () {
                 $.each(cachedGameSearch.data, function (i, v) {
                     if (v.names.international == ui.item.label) {
                         cachedGame = v;
-                        var urlRequest = "http://www.speedrun.com/api/v1/games/" + v.id + "/categories";
+                        var urlRequest = "https://www.speedrun.com/api/v1/games/" + v.id + "/categories";
                         $.ajax({
                             url: urlRequest,
                             dataType: "jsonp",
@@ -258,7 +258,7 @@ $(function () {
                 $(this).val(formattedString);
             }
         });
-
+		
         $.verify.addRules({
             runnerValidation: function (r) {
                 var foundPlayer = jQuery.grep(cachedRunner, function (a) {
@@ -269,7 +269,7 @@ $(function () {
                     return true;
                 }
 
-                var urlRequest = "http://www.speedrun.com/api/v1/users?name=" + r.field.context.value;
+                var urlRequest = "https://www.speedrun.com/api/v1/users?name=" + r.field.context.value;
                 $.ajax({
                     url: urlRequest,
                     dataType: "jsonp",
@@ -310,7 +310,7 @@ $(function () {
 
             $("#playerControlRunner" + runnerNumberIterator).autocomplete({
                 source: function (request, response) {
-                    var urlRequest = "http://www.speedrun.com/api/v1/users?name=" + request.term;
+                    var urlRequest = "https://www.speedrun.com/api/v1/users?name=" + request.term;
                     $.ajax({
                         url: urlRequest,
                         dataType: "jsonp",
@@ -348,7 +348,7 @@ $(function () {
 
         $("#playerControlRunner1").autocomplete({
             source: function (request, response) {
-                var urlRequest = "http://www.speedrun.com/api/v1/users?name=" + request.term;
+                var urlRequest = "https://www.speedrun.com/api/v1/users?name=" + request.term;
                 $.ajax({
                     url: urlRequest,
                     dataType: "jsonp",
