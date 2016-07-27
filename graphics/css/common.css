@@ -55,7 +55,7 @@ body {
 .gameCapture, .webcam {
 	position: fixed;
 	background-color: #00DD00;
-	border: 5px solid #612c7c;
+	border: 5px solid black;
 	box-sizing: border-box;
 }
 
